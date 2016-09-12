@@ -1,0 +1,37 @@
+
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+public class RMIClient {
+    
+    public static void main (String args[]){
+        RMIClient client = new RMIClient();
+        client.connectServer();
+    }
+
+    private void connectServer() {
+        try{
+            //Retorna uma referência ao Registo objeto remoto para o 
+            //host local na porta de registo predefinido de 1099.
+            Registry reg = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            
+            //Retorna a referência remota ligada ao nome especificado nesse registro.
+            RMI rmi = (RMI) reg.lookup("Server");
+            
+            System.out.println("Concectado ao Servidor!");
+            
+            //Chama o método Objeto Remoto e envia o dado para processamento
+            String text = rmi.getData("Anderson");
+            System.out.println(text);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+}
