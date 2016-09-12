@@ -1,2 +1,2 @@
-# Sistemas-Distribu-dos
-Exercícios da Disciplina.
+# Sistemas-Distribuidos
+Exercício em sala
