@@ -1,0 +1,43 @@
+
+import java.rmi.server.UnicastRemoteObject;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+
+/*
+ * Classe do Servidor que herda da classe UnicastRemoteObject que é responsável
+ * em realizar a ligação com o sistema RMI.
+ */
+
+public class RMIServer extends UnicastRemoteObject implements RMI{
+
+    public RMIServer() throws RemoteException{
+        super();
+    }
+    
+    //Método que o texto recebido do cliente e retorna o texto com as alterações
+    public String getData(String text) throws RemoteException {
+        text = "OLÁ **** "+text+" *****";
+        return text;
+    }
+    
+    //Cria o Objeto Remoto e registra no Sistema RMI, e deixa disponível aos clientes
+    public static void main (String args[]){
+        
+        try{
+            //Cria e exporta uma instância do Registro na máquina local
+            //que aceita solicitações na porta especificada.
+            Registry reg = LocateRegistry.createRegistry(1099);
+            
+            //Registra o objeto diferenciando-o definido um nome para identifiá-lo
+            //e a referência do próprio objeto
+            reg.rebind("Server", new RMIServer());
+            System.out.println("Servidor Iniciado!");
+            
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+}
