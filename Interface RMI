@@ -1,0 +1,13 @@
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+/*
+ * Interface que é utilizada para disponibilizar
+ * o serviço a ser usado pelo Cliente;
+ */
+
+public interface RMI extends Remote{
+    
+    public String getData(String text) throws RemoteException;
+}
